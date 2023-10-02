@@ -10,7 +10,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
 import { register } from "./controllers/auth.js";
+import { createPost } from "./controllers/posts.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,14 +37,16 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-/** ROUTES WITH FILES */
 app.get("/", (req, res) => {
   res.send("working!!!");
 });
+/** ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picturePath"), register);
+app.post("/posts", upload.single("picturePath"), createPost);
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
 
 /** Mongoose setup */
 const PORT = process.env.PORT || 6001;
