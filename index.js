@@ -25,7 +25,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.use("/assets", express.static(path.join(__dirname, "/public/assets")));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -37,12 +37,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-app.get("/", (req, res) => {
-  res.send("working!!!");
-});
 /** ROUTES WITH FILES */
-app.post("/auth/register", upload.single("picturePath"), register);
-app.post("/posts", upload.single("picturePath"), createPost);
+app.post("/auth/register", upload.single("picture"), register);
+app.post("/posts", upload.single("picture"), createPost);
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
