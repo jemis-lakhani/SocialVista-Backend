@@ -37,7 +37,7 @@ app.use(cors());
 // });
 // const upload = multer({ storage });
 
-app.get("/", (res, req) => {
+app.get("/", (req, res) => {
 	res.send("Backend running");
 });
 
