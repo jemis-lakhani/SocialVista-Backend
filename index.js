@@ -37,10 +37,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-app.use("/test", (req, res) => {
-  res.status(200).json("Server is running");
-});
-
 /** ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", upload.single("picture"), createPost);
