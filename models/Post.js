@@ -18,6 +18,7 @@ const postSchema = new mongoose.Schema(
     description: String,
     picturePath: String,
     userPicturePath: String,
+    postImage: Buffer,
     likes: {
       type: Map,
       of: Boolean,

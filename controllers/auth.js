@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import fs from "fs";
 
 /** Register */
 export const register = async (req, res) => {
@@ -16,6 +17,7 @@ export const register = async (req, res) => {
       occupation,
     } = req.body;
 
+    const file = req.files.picture; // Access the uploaded file, from frontend we passing picture field
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
@@ -25,6 +27,7 @@ export const register = async (req, res) => {
       email,
       password: passwordHash,
       picturePath,
+      userImage: file.data,
       friends,
       location,
       occupation,
