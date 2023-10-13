@@ -29,6 +29,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    userImage: Buffer,
     friends: {
       type: Array,
       default: [],
